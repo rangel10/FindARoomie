@@ -5,8 +5,6 @@ import Info from './Info.jsx';
 const App = () => (
   <div>
     <h1>Welcome to FindARoomie!</h1>
-    <Hello />
-    <Info />
   </div>
 );
 
