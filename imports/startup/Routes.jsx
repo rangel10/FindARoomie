@@ -1,19 +1,22 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React from 'react';
+//import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { mount } from 'react-mounter';  
 
 //Import App
-import App from "../ui/App";
+import App from '../ui/App';
 
 //Import componentes
-import AccountsUIWR from "../ui/components/AccountsUIWrapper";
+import AccountsUIWR from '../ui/AccountsUIWrapper';
+import AddRoom from '../ui/AddRoom';
 
 
 FlowRouter.route('/', {
   name: 'main',
   action() {
-    mount(App);
+    mount(App, {
+      content: <AddRoom/>
+    });
   },
 });
 

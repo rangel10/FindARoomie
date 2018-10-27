@@ -8,10 +8,10 @@ Accounts.onCreateUser(function(options, user)
   user.profile.profileImage = options.profileImage;
   user.profile.email = options.email;
   user.profile.phoneNumber = options.phoneNumber;
-  user.profile.profileFB = "";
-  user.profile.profileTW = "";
+  user.profile.profileFB = '';
+  user.profile.profileTW = '';
   user.profile.type = options.type;
-  user.profile.rooms = "";
+  user.profile.rooms = [];
   
   // Returns the user object
   return user;
