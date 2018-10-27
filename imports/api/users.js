@@ -1,10 +1,8 @@
-/* import {Meteor} from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {check} from 'meteor/check';
   
-export const Users = new Mongo.Collection('users');
-  
-  if (Meteor.isServer) {
+if (Meteor.isServer) {
     Meteor.publish('users.userID', function userAN(userID) {
       return Usuarios.find({
         userID: userID
@@ -50,26 +48,25 @@ export const Users = new Mongo.Collection('users');
     },
     'users.findById'({userID}) {
       check(userID, String);
-      const user = Users.findOne({userID: userID});
+      const user = Meteor.user.findOne({userID: userID});
       return user;
     },
     'users.updateType'({userID},newType) {
-      const user = Users.findOne({userID: userID});
+      const user = Meteor.user.findOne({userID: userID});
       Users.update(user[0].userID, type = newType);
       return user;
     },
     'users.updateRooms'({userID},roomsP) {
-        const user = Users.findOne({userID: userID});
+        const user = Meteor.user.findOne({userID: userID});
         Users.update(user[0].userID, rooms = roomsP);
         return user;
     },
     'users.updateContactInfo'({userID},emailP,phoneNumberP,profileFBP,profileTWP) {
-        const user = Users.findOne({userID: userID});
-        Users.update(user[0].userID, email = emailP);
-        Users.update(user[0].userID, phoneNumber = phoneNumberP);
-        Users.update(user[0].userID, profleFB = profileFBP);
-        Users.update(user[0].userID, profileTW = profileTWP);
+        const user = Meteor.user.findOne({userID: userID});
+        Meteor.user.update(user[0].userID, email = emailP);
+        Meteor.user.update(user[0].userID, phoneNumber = phoneNumberP);
+        Meteor.user.update(user[0].userID, profleFB = profileFBP);
+        Meteor.user.update(user[0].userID, profileTW = profileTWP);
         return user;
     }
   });
-   */
