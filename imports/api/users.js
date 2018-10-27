@@ -4,7 +4,7 @@ import {check} from 'meteor/check';
   
 if (Meteor.isServer) {
     Meteor.publish('users.userID', function userAN(userID) {
-      return Usuarios.find({
+      return Meteor.user.find({
         userID: userID
       });
     });
