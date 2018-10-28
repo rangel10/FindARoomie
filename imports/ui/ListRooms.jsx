@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Rooms } from '../api/rooms';
+
+import { Rooms } from '../api/rooms.js';
 
 export class ListRooms extends Component
 {
+  constructor(props)
+  {
+    super(props)
+    this.state={}
+  }
+    renderRooms()
+    {
+      return this.props.rooms.map()
+    }
     render() 
     {
         return (
@@ -16,10 +27,14 @@ export class ListRooms extends Component
 
 }
 
+ListRooms.propTypes ={
+  rooms: PropTypes.array.isRequired
+}
+
 export default withTracker(() => 
 {
     Meteor.subscribe("rooms")
     return {
-      room: Rooms.find({}).fetch()
+      rooms: Rooms.find({}).fetch()
     };
 })(ListRooms);
