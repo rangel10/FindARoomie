@@ -15,11 +15,12 @@ export class ListUsers extends Component
     }
     renderUsers()
     {
-      return this.props.users.map((r)=>{
+      return this.props.users.map((r,i)=>{
           let description = "Hi Im a user!";
           return(
-              <div className="col-sm">
+              <div className="row">
               <UserCard
+              key={i}
               profileImage='https://static.thenounproject.com/png/17241-200.png'
               firstName={r.firstName}
               lastName={r.lastName}
@@ -35,9 +36,9 @@ export class ListUsers extends Component
     render() 
     {
         return (
-          <div className='container'>
-           <h1>Aca va la lista de usuarios</h1>
-          <div className="row">
+          <div className='listUsers'>
+          <h1>Aca va la lista de usuarios</h1>
+          <div className="grid-container">
           {this.renderUsers()}
           </div>
           </div>
@@ -51,8 +52,12 @@ ListUsers.propTypes={
 
 export default withTracker(() => 
 {
-    Meteor.subscribe("users")
+    console.log("Subscribing")
+    Meteor.subscribe("users");
+    console.log("Subscribed!");
+    console.log(Meteor.users.find({}).fetch());
     return {
       users: Meteor.users.find({}).fetch()
     };
+    
 })(ListUsers);

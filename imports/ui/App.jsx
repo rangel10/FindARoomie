@@ -11,6 +11,8 @@ import ListUsers from './ListUsers.jsx';
 import Navbar from './Navbar.jsx';
 import MenuAppBar from './MenuAppBar.jsx';
 import RoomCard from './RoomCard.jsx';
+import Login from './Login.jsx';
+import Register from './Register.jsx';
 
 
 export class App extends Component {
@@ -25,6 +27,10 @@ export class App extends Component {
         <ListRooms/>
         <RoomCard/>
         <ListUsers/>
+        <h4>Test Auth</h4>
+        <Register/>
+        
+        
       </div>
     );
   }
