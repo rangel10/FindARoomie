@@ -17,6 +17,7 @@ class AddRoom extends Component {
 
     this.state = {
       checkedItems: new Map(),
+      titulo:'',
       descripcion:'',
       precio:'',
       tamano:'',
@@ -47,6 +48,7 @@ class AddRoom extends Component {
     })
     const newRoom = {
       owner:this.props.user.username,
+      titulo:this.state.titulo,
       descripcion:this.state.descripcion,
       precio:this.state.precio,
       tamano:this.state.tamano,
@@ -77,6 +79,17 @@ class AddRoom extends Component {
         <h1>Agregar salas</h1>
         <Container>
           <form action="">
+          <Row justify={'center'}>
+              <Col md={8}>
+              <TextField
+          id="titulo"
+          label="Titulo"
+          className={'textField dense'}
+          onChange={(e) => this.handleChange(e)}
+          margin="dense"
+          />
+              </Col>
+            </Row>
             <Row justify={'center'}>
               <Col md={8}>
               <TextField
@@ -135,6 +148,18 @@ class AddRoom extends Component {
                   onChange={(e) => this.handleChange(e)}
                   margin="dense"
                   />
+              </Col>
+            </Row>
+            <Row justify={'center'}>
+              <Col md={8}>
+              <TextField
+          id="reglas"
+          label="Reglas"
+          multiline
+          rows="4"
+          className={'textField'}
+          onChange={(e) => this.handleChange(e)}
+          />
               </Col>
             </Row>
             <Row>
