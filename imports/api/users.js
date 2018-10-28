@@ -3,27 +3,22 @@ import {Mongo} from 'meteor/mongo';
 import {check} from 'meteor/check';
   
 if (Meteor.isServer) {
-    Meteor.publish('users.userID', function userAN(userID) {
-      return Meteor.user.find({
-        userID: userID
-      });
-    });
-  }
+  Meteor.publish('users', () => {
+    return Meteor.users.find({});
+  });
+}
   
   Meteor.methods({
     'users.add'({
-      userID,
       firstName,
       lastName,
       email,
-      phoneNumber,
-      profileFB,
-      profileTW
+      phoneNumber
     }) {
   
       try {
-        Usuarios.insert({
-          userID: userID,
+        Meteor.users.insert({
+          userID:  '' + (Meteor.users.find({}).count+1),
           profileImage: "",
           firstName: firstName,
           lastName: lastName,
@@ -48,25 +43,29 @@ if (Meteor.isServer) {
     },
     'users.findById'({userID}) {
       check(userID, String);
-      const user = Meteor.user.findOne({userID: userID});
+      const user = Meteor.users.findOne({userID: userID}).fetch()
       return user;
     },
+    'users.findAll'(){
+      const users = Meteor.users.find().fetch()
+      return users;
+    },
     'users.updateType'({userID},newType) {
-      const user = Meteor.user.findOne({userID: userID});
-      Users.update(user[0].userID, type = newType);
+      const user = Meteor.users.findOne({userID: userID});
+      Meteor.users.update(user[0].userID, type = newType);
       return user;
     },
     'users.updateRooms'({userID},roomsP) {
-        const user = Meteor.user.findOne({userID: userID});
-        Users.update(user[0].userID, rooms = roomsP);
+        const user = Meteor.users.findOne({userID: userID});
+        Meteor.users.update(user[0].userID, rooms = roomsP);
         return user;
     },
     'users.updateContactInfo'({userID},emailP,phoneNumberP,profileFBP,profileTWP) {
-        const user = Meteor.user.findOne({userID: userID});
-        Meteor.user.update(user[0].userID, email = emailP);
-        Meteor.user.update(user[0].userID, phoneNumber = phoneNumberP);
-        Meteor.user.update(user[0].userID, profleFB = profileFBP);
-        Meteor.user.update(user[0].userID, profileTW = profileTWP);
+        const user = Meteor.users.findOne({userID: userID});
+        Meteor.users.update(user[0].userID, email = emailP);
+        Meteor.users.update(user[0].userID, phoneNumber = phoneNumberP);
+        Meteor.users.update(user[0].userID, profleFB = profileFBP);
+        Meteor.users.update(user[0].userID, profileTW = profileTWP);
         return user;
     }
   });
