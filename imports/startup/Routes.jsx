@@ -9,9 +9,19 @@ import App from '../ui/App';
 //Import componentes
 import AccountsUIWR from '../ui/AccountsUIWrapper';
 import AddRoom from '../ui/AddRoom';
+import Hello from '../ui/Hello';
 
 
 FlowRouter.route('/', {
+  name: 'main',
+  action() {
+    mount(App, {
+      content: <Hello/>
+    });
+  },
+});
+
+FlowRouter.route('/addroom', {
   name: 'main',
   action() {
     mount(App, {
