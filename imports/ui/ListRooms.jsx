@@ -2,39 +2,41 @@ import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-
-import { Rooms } from '../api/rooms.js';
+import { Rooms } from '../api/rooms';
+import Grid from '@material-ui/core/Grid';
+import CardRoom from './CardRoom';
 
 export class ListRooms extends Component
 {
-  constructor(props)
+  render() 
   {
-    super(props)
-    this.state={}
+    return (
+      <div>
+        <Grid container className='root' spacing={16}>
+          <Grid item xs={12}>
+            <Grid container justify="center" spacing={16}>
+              {this.props.rooms.map(value => (
+                <Grid key={value._id} item>
+                  <CardRoom room={value}/>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        </Grid>
+      </div>
+    );
   }
-    renderRooms()
-    {
-      return this.props.rooms.map()
-    }
-    render() 
-    {
-        return (
-          <div>
-            <h1>Aca va la lista de salas</h1>
-          </div>
-        );
-    }
 
 }
 
 ListRooms.propTypes ={
   rooms: PropTypes.array.isRequired
-}
+};
 
 export default withTracker(() => 
 {
-    Meteor.subscribe("rooms")
-    return {
-      rooms: Rooms.find({}).fetch()
-    };
+  Meteor.subscribe('rooms');
+  return {
+    rooms: Rooms.find({}).fetch()
+  };
 })(ListRooms);

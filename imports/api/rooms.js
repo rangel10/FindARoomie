@@ -14,6 +14,7 @@ Meteor.methods({
     
     let id = Rooms.insert({
       owner:room.owner,
+      titulo:room.titulo,
       descripcion:room.descripcion,
       precio:room.precio,
       tamano:room.tamano,
