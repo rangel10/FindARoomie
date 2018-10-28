@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 //import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { mount } from 'react-mounter';  
@@ -36,3 +36,4 @@ FlowRouter.route('/Account', {
     mount(AccountsUIWR);
   },
 });
+ */

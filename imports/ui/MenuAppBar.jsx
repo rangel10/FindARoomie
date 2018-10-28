@@ -15,6 +15,7 @@ import Menu from '@material-ui/core/Menu';
 // Imports manejo usuarios
 import { Meteor } from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
+import AccountsUIWrapper from './AccountsUIWrapper';
 
 const styles = {
   root: {
@@ -53,12 +54,12 @@ class MenuAppBar extends React.Component {
     const open = Boolean(anchorEl);
 
     return (
-      <div className={classes.root}>
-        <AppBar position="static">
+      <AppBar position="static">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
+      <AccountsUIWrapper/>
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Find a Roomie - Web Dev Uniandes
             </Typography>
@@ -93,7 +94,6 @@ class MenuAppBar extends React.Component {
             )}
           </Toolbar>
         </AppBar>
-      </div>
     );
   }
 }

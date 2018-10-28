@@ -20,5 +20,4 @@ react-meteor-data       # React higher-order component for reactively tracking M
 accounts-password
 accounts-ui
 blaze
-kadira:flow-router
 

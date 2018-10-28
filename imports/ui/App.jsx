@@ -19,16 +19,19 @@ export class App extends Component {
 
   render() {
     return (
-      <div className = "app">
+      <div>
         <MenuAppBar/>
-        <AccountsUIWrapper/>
+        <div className="content">
+          {this.props.children}
+        </div>
+        {/* <AccountsUIWrapper/>
         {this.props.content}
         <h4>Contenido de prueba</h4>
         <ListRooms/>
         <RoomCard/>
         <ListUsers/>
         <h4>Test Auth</h4>
-        <Register/>
+        <Register/> */}
         
         
       </div>
