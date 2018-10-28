@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Rooms } from '../api/rooms';
 import Grid from '@material-ui/core/Grid';
@@ -27,6 +28,10 @@ export class ListRooms extends Component
   }
 
 }
+
+ListRooms.propTypes ={
+  rooms: PropTypes.array.isRequired
+};
 
 export default withTracker(() => 
 {
