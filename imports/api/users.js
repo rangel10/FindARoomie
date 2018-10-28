@@ -67,5 +67,14 @@ Meteor.methods({
     Meteor.users.update(user[0].userID, profleFB = profileFBP);
     Meteor.users.update(user[0].userID, profileTW = profileTWP);
     return user;
+  },
+  'users.findByUsername'(username) {
+    //console.log('me llego',username);
+    check(username, String);
+    const user = Meteor.users.find({username: username}).fetch();
+    //console.log(user);
+    if(typeof user != 'undefined'){
+      return user;
+    }
   }
 });

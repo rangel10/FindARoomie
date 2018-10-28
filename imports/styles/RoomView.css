@@ -1,0 +1,35 @@
+.container {
+  background-color: #f4f4f4;
+  display: flex;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.root {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
+.margin{
+  margin:12px;
+}
