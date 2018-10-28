@@ -43,11 +43,11 @@ if (Meteor.isServer) {
     },
     'users.findById'({userID}) {
       check(userID, String);
-      const user = Meteor.users.findOne({userID: userID}).fetch()
+      const user = Meteor.users.findOne({userID: userID})
       return user;
     },
     'users.findAll'(){
-      const users = Meteor.users.find().fetch()
+      const users = Meteor.users.find()
       return users;
     },
     'users.updateType'({userID},newType) {
