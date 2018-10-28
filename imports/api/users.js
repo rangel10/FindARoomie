@@ -1,7 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {check} from 'meteor/check';
-  
+
 if (Meteor.isServer) {
   Meteor.publish('users', () => {
     return Meteor.users.find({});
@@ -9,37 +9,22 @@ if (Meteor.isServer) {
 }
   
 Meteor.methods({
-  'users.add'({
-    firstName,
-    lastName,
-    email,
-    phoneNumber
-  }) {
-  
-    try {
-      Meteor.users.insert({
-        userID:  '' + (Meteor.users.find({}).count+1),
-        profileImage: '',
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        phoneNumber: phoneNumber,
-        profileFB: '',
-        profileTW: '',
-        type: 'Search',
-        rooms: {}
-      });
-      return true;
-    } catch (err) {
-      if (err) {
-        if (err.code === 11000) {
-          throw new Meteor.Error('The user with the ID or Email given allready exist');
-        } else {
-          throw new Meteor.Error('Error during creating a new user. Please try again.');
-        }
-      }
-    }
-  
+  'users.add':function(user){
+    let userID = Meteor.users.insert({
+      profileImage:user.profileImage,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      profileFB: user.profileFB,
+      profileTW: user.profileTW,
+      type: 'Search',
+      rooms: {}
+    });
+    console.log('insertado',userID);
+    let result = Meteor.users.find({username:user.firstName}).fetch();
+    console.log(result[0].profile);
+
   },
   'users.findById'({userID}) {
     check(userID, String);
