@@ -30,7 +30,7 @@ Meteor.methods({
   },
   'users.findById'({userID}) {
     check(userID, String);
-    const user = Meteor.users.findOne({userID: userID});
+    const user = Meteor.users.find({userID: userID}).fetch();
     return user;
   },
   'users.findAll'(){
