@@ -6,7 +6,6 @@ import { Container, Row, Col } from 'react-grid-system';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import PropTypes from 'prop-types';
-import AccountsUIWrapper from './AccountsUIWrapper';
 
 class Register extends Component {
     constructor(props){
