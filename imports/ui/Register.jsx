@@ -7,7 +7,6 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import PropTypes from 'prop-types';
 import AccountsUIWrapper from './AccountsUIWrapper';
-import { Accounts } from "meteor/accounts-base";
 
 class Register extends Component {
     constructor(props){
@@ -35,19 +34,21 @@ class Register extends Component {
     {
         event.preventDefault();
         
-        const newUser = {
-            userID: Meteor.userId() ,  
-            profileImage:this.props.profileImage,
-            firstName:this.state.firstName,
-            lastName:this.state.lastName,
+        let newUser = {
             email:this.state.email,
             password:this.state.password,
-            phoneNumber:this.state.phoneNumber,
-            profileFB: '',
-            profileTW: '',
-            type: 'Search',
-            rooms: {}
-        };
+            profile:{
+                userID: Meteor.userId() ,  
+                profileImage:this.props.profileImage,
+                firstName:this.state.firstName,
+                lastName:this.state.lastName,
+                phoneNumber:this.state.phoneNumber,
+                profileFB: '',
+                profileTW: '',
+                type: 'Search',
+                rooms: []   
+            }     
+        }
         console.log('newUser',newUser);
         if (password!=="" && password!==null)
         {
@@ -192,11 +193,7 @@ Register.propTypes = {
 };
 
 export default withTracker(() => {
-<<<<<<< HEAD
     Meteor.subscribe('users')
-=======
-    Meteor.subscribe('users');
->>>>>>> 797027dbe173dc74537b668f4f414f8fe61171dd
     return {
         users: Meteor.users.find({}).fetch()
     };
