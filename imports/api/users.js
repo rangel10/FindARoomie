@@ -25,9 +25,6 @@ Meteor.methods({
     let result = Meteor.users.find({username:user.firstName}).fetch();
     console.log(result[0].profile);
   },
-  'users.register':function(user){
-
-  },
   'users.findById'({userID}) {
     check(userID, String);
     const user = Meteor.users.find({userID: userID}).fetch();
