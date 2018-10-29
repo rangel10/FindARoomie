@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Container, Row, Col } from 'react-grid-system';
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import PropTypes from 'prop-types';
 
 class Register extends Component {
@@ -11,7 +12,8 @@ class Register extends Component {
         super(props);
         
         this.state = {
-            userID:'',  
+            userID:'',
+            password:'',  
             profileImage:'',
             firstName:'',
             lastName:'',
@@ -29,7 +31,7 @@ class Register extends Component {
     handleSubmit(event)
     {
         event.preventDefault();
-        Meteor.users
+        /* Meteor.users
         const newUser = {
             userID:'',  
             profileImage:this.props.profileImage,
@@ -44,8 +46,20 @@ class Register extends Component {
             rooms: {}
         };
         console.log('newUser',newUser);
-        Meteor.call('users.add',newUser)
-        
+        Meteor.call('users.add',newUser) */
+        let user = {
+            email:this.state.email,
+            password:this.state.password,
+            profile:{
+                firstName:this.state.firstName,
+                lastName:this.state.lastName
+            }
+        }
+        console.log('voy a registrar');
+        Accounts.createUser(user, (err,res)=>{
+            if(err){console.log(err)}
+        })
+        console.log('registrado');
     }
     
     handleChange = event => {
@@ -171,6 +185,7 @@ Register.propTypes = {
 };
 
 export default withTracker(() => {
+    Meteor.subscribe('users');
     return {
         user: Meteor.user()
     };

@@ -56,7 +56,11 @@ class RoomView extends Component {
       <div className='container'>
         <Container spacing={24} style={{'marginLeft':0 ,'marginRight':0}}>
           <Row justify={'center'}>
-            <h1>{this.state.room.titulo}</h1>
+            <div className={'margin'}>
+              <Typography variant="h2">
+                {this.state.room.titulo}
+              </Typography>
+            </div>
           </Row>
           <Row justify={'between'}>
             <Col md={4}>
