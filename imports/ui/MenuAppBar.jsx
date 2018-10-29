@@ -50,6 +50,11 @@ class MenuAppBar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  handleHome = () => {
+    window.location.assign('/');
+};
+
+
   handleLogout = () => {
     Meteor.logout((err,result) => {
       if(err){console.log(err)}
@@ -105,17 +110,17 @@ class MenuAppBar extends React.Component {
     return (
       <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
+            <Typography onClick={this.handleHome} variant="h6" color="inherit" className={classes.grow}>
               Find a Roomie
             </Typography>
-            <Button variant="outlined"
+            <Button 
                     id={'boton-navbar1'}
                     className={'button'}
                     onClick={this.handleOffer}
                     >
             Ofrecer
             </Button>
-            <Button variant="outlined"
+            <Button 
                     id={'boton-navbar1'}
                     className={'button'}
                     onClick={this.handleViewRooms}

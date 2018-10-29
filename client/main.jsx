@@ -12,6 +12,7 @@ import Login from '../imports/ui/Login';
 import ListRooms from '../imports/ui/ListRooms';
 import RoomView from '../imports/ui/RoomView';
 import AddRoom from '../imports/ui/AddRoom';
+import LandingPage from '../imports/ui/LandingPage.jsx';
 //import '../imports/startup/Routes';
 
 Meteor.startup(() => {
@@ -19,7 +20,7 @@ Meteor.startup(() => {
     <Router>
       <App>
         <Switch>
-          <Route exact path="/" component={Hello}/>
+          <Route exact path="/" component={LandingPage}/>
           <Route exact path="/register" component={Register}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/addroom" component={AddRoom}/>

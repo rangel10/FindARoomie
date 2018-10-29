@@ -42,7 +42,7 @@ function ImgMediaCard(props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Owner: {firstName} {lastName}
+            Dueño: {firstName} {lastName}
           </Typography>
           <Typography gutterBottom variant="h5" component="h5">
             {type}

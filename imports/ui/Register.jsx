@@ -58,7 +58,7 @@ class Register extends Component {
                 }
                 else
                 {
-                    alert("User registration succesfull");
+                    window.location.assign('/viewrooms')
                 }
             })
         }

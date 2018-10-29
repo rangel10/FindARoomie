@@ -102,74 +102,74 @@ function Album(props) {
           </Typography><br/>
           <Grid container spacing={40}>
             
-              <Grid item sm={6} md={4} lg={3}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://www.bayareasystems.com/web/wp-content/uploads/2018/02/free.png" // eslint-disable-line max-len
-                    title="Free"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
+            <Grid item sm={6} md={4} lg={3}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image="https://www.bayareasystems.com/web/wp-content/uploads/2018/02/free.png" // eslint-disable-line max-len
+                  title="Free"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" component="h2">
                       Free for Everyone!
-                    </Typography>
-                    <Typography>
+                  </Typography>
+                  <Typography>
                       Find a Roomie is a free App so everyone can join it, More people means more chances to find a Roomie 
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item sm={6} md={4} lg={3}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://www.elegantthemes.com/blog/wp-content/uploads/2018/02/wordpress-theme-security.png" // eslint-disable-line max-len
-                    title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item sm={6} md={4} lg={3}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image="https://www.elegantthemes.com/blog/wp-content/uploads/2018/02/wordpress-theme-security.png" // eslint-disable-line max-len
+                  title="Image title"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" component="h2">
                       Safe and Secure
-                    </Typography>
-                    <Typography>
+                  </Typography>
+                  <Typography>
                       All your contact information is kept private through our secure info system.
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item sm={6} md={4} lg={3}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://blueocean.ca/wp-content/uploads/2016/04/Call-Center-Employee-Experience-HR-WFM.png" // eslint-disable-line max-len
-                    title="Experience"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item sm={6} md={4} lg={3}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image="https://blueocean.ca/wp-content/uploads/2016/04/Call-Center-Employee-Experience-HR-WFM.png" // eslint-disable-line max-len
+                  title="Experience"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" component="h2">
                     Best Experience
-                    </Typography>
-                    <Typography>
+                  </Typography>
+                  <Typography>
                     Our team guarantees the best experience when it comes to finding a Roomie by means of the platform
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item sm={6} md={4} lg={3}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="http://robohub.org/wp-content/uploads/2017/02/grid-AI.jpg" // eslint-disable-line max-len
-                    title="AI"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item sm={6} md={4} lg={3}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image="http://robohub.org/wp-content/uploads/2017/02/grid-AI.jpg" // eslint-disable-line max-len
+                  title="AI"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" component="h2">
                       Find the perfect Roomie using AI! (Coming Soon)
-                    </Typography>
-                    <Typography>
+                  </Typography>
+                  <Typography>
                       Based on Watson Personality Insights Technology we can find you the perfect Roomie based on his/her personality!
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
         
           </Grid>
         </div>

@@ -60,7 +60,11 @@ class AddRoom extends Component {
     console.log('newRoom',newRoom);
     Meteor.call('rooms.addRoom',newRoom, function(err,result){
       if(err){console.log(err)}
-      Meteor.call('users.pushRoom',newRoom.owner,result);
+      Meteor.call('users.pushRoom',newRoom.owner,result,function(err,result){
+        if(err){console.log(err)}
+          window.location.assign('/viewrooms')
+        }
+      )
     })
     
   }
