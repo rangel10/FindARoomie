@@ -37,9 +37,9 @@ class RoomView extends Component {
             if(error){
               alert('Error getUser');
             }else{
-              //console.log(result[0]);
+              //console.log('resultado',result);
               this.setState({
-                ownerRoom: result[0]
+                ownerRoom: result
               });
             }
           }.bind(this));
@@ -70,7 +70,7 @@ class RoomView extends Component {
       Precio
             </Typography>
             <Typography component="p">
-              {r.precio}
+              {'$' + r.precio}
             </Typography>
           </Paper>
         </Row>
@@ -112,8 +112,8 @@ class RoomView extends Component {
     
   render() {
     const {room,ownerRoom} = this.state;
+    console.log(ownerRoom);
     if(room!=undefined && ownerRoom.hasOwnProperty('_id')){
-      console.log(ownerRoom);
       return (
         <div className='container'>
           <Container spacing={24} style={{'marginLeft':0 ,'marginRight':0}}>

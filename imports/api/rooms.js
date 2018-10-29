@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 
 export const Rooms = new Mongo.Collection('rooms');
 
@@ -24,11 +25,12 @@ Meteor.methods({
       reglas:room.reglas
     });
     console.log('insertado',id);
-    let result = Meteor.users.find({username:room.owner},{fields:{'profile':1,'_id':0}}).fetch();
-    console.log(result[0].profile.rooms);
-    result[0].profile.rooms.push(id);
-    console.log(result[0]);
-    Meteor.users.update({username: room.owner}, {$set: {'profile.rooms': result[0].profile.rooms}});
+    return id;
+    //let result = Meteor.users.find({'emails[0].address':room.owner},{fields:{'profile':1,'_id':0}}).fetch();
+    //console.log(owner);
+    //result[0].profile.rooms.push(id);
+    //console.log(result[0]);
+    //Meteor.users.update({username: room.owner}, {$set: {'profile.rooms': result[0].profile.rooms}});
   },
   'rooms.getRoom':function(id){
     //console.log('fetching',id);
