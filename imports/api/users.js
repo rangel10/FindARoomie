@@ -58,8 +58,8 @@ Meteor.methods({
   'users.findByUsername'(username) {
     //console.log('me llego',username);
     check(username, String);
-    const user = Meteor.users.find({username: username}).fetch();
-    //console.log(user);
+    const user = Meteor.users.find({username: username},{fields:{username:1,profile:1}}).fetch();
+    console.log(user);
     if(typeof user != 'undefined'){
       return user;
     }

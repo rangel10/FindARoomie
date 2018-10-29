@@ -188,7 +188,7 @@ class AddRoom extends Component {
 }
 
 export default withTracker(() => {
-  Meteor.subscribe('userData');
+  Meteor.subscribe('user');
   Meteor.subscribe('rooms');
   return {
     user: Meteor.user()
