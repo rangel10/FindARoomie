@@ -47,7 +47,7 @@ class AddRoom extends Component {
       servicios:selected
     })
     const newRoom = {
-      owner:this.props.user.username,
+      owner:this.props.user.emails[0].address,
       titulo:this.state.titulo,
       descripcion:this.state.descripcion,
       precio:this.state.precio,
@@ -58,7 +58,10 @@ class AddRoom extends Component {
       reglas:this.state.reglas
     };
     console.log('newRoom',newRoom);
-    Meteor.call('rooms.addRoom',newRoom)
+    Meteor.call('rooms.addRoom',newRoom, function(err,result){
+      if(err){console.log(err)}
+      Meteor.call('users.pushRoom',newRoom.owner,result);
+    })
     
   }
 
@@ -76,7 +79,7 @@ class AddRoom extends Component {
     else{
       return (
         <div className='root'> 
-        <h1>Agregar salas</h1>
+        <h1>Agregar Habitación</h1>
         <Container>
           <form action="">
           <Row justify={'center'}>

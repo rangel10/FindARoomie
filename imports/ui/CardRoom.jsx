@@ -29,9 +29,7 @@ class CardRoom extends Component {
             image={'/images/defaultRoom.jpg'}
           />
           <CardActions className='actions'>
-            <Link to={`viewrooms/${this.props.room._id}`}>Click</Link>
             <Button href={`viewrooms/${this.props.room._id}`}>Ver Habitación</Button>
-            <Button onClick={()=>{window.location.assign(`/${this.props.room._id}`);}}>Test</Button>
           </CardActions>
         </Card>
       </div>

@@ -1,6 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {check} from 'meteor/check';
+import { Accounts } from 'meteor/accounts-base';
 
 if (Meteor.isServer) {
   Meteor.publish('users', () => {
@@ -53,12 +54,24 @@ Meteor.methods({
     return user;
   },
   'users.findByUsername'(username) {
-    //console.log('me llego',username);
-    check(username, String);
-    const user = Meteor.users.find({username: username},{fields:{username:1,profile:1}}).fetch();
-    console.log(user);
-    if(typeof user != 'undefined'){
-      return user;
+    if (Meteor.isServer){
+      //console.log('me llego',username);
+      check(username, String);
+      const user = Accounts.findUserByEmail(username);
+      //console.log(user);
+      if(typeof user != 'undefined'){
+        return user;
+      }
+    }
+  },
+  'users.pushRoom'(owner,roomid){
+    if (Meteor.isServer){
+      let user = Accounts.findUserByEmail(owner);
+      //console.log('encontrado',user);
+      let userid=user._id;
+      let rooms = user.profile.rooms;
+      rooms.push(roomid);
+      Meteor.users.update({_id:userid},{$set: {'profile.rooms': rooms}});
     }
   }
 });
