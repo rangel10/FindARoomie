@@ -169,23 +169,25 @@ class AddRoom extends Component {
           />
               </Col>
             </Row>
-            <Row>
-            <FormControl component="fieldset" className={'formControl'}>
-          <FormLabel component="legend">Con que servicios cuenta?</FormLabel>
-          <FormGroup>
-            {services.map(item => (
-              <FormControlLabel
-              key={item}
-              control={
-                <Checkbox onChange={this.handleCheckChange} checked={this.state.checkedItems.get(item.name)} value={item} />
-              }
-              label={item}
-              />
-              ))}
-          </FormGroup>
-        </FormControl>
+            <Row justify={'center'}> 
+              <FormControl component="fieldset" className={'formControl'}>
+                <FormLabel component="legend">Con que servicios cuenta?</FormLabel>
+                <FormGroup>
+                  {services.map(item => (
+                    <FormControlLabel
+                    key={item}
+                    control={
+                      <Checkbox onChange={this.handleCheckChange} checked={this.state.checkedItems.get(item.name)} value={item} />
+                    }
+                    label={item}
+                    />
+                    ))}
+                </FormGroup>
+              </FormControl>
             </Row>
-            <Button variant="contained" size="large" color="primary" className={'button'} onClick={this.handleSubmit}>Ofrecer</Button>
+            <Row justify={'end'}>
+              <Button variant="contained" size="large" color="primary" className={'button'} onClick={this.handleSubmit}>Ofrecer</Button>
+            </Row>
           </form>
         </Container>
       </div>

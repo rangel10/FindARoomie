@@ -51,7 +51,7 @@ function ImgMediaCard(props) {
             {description}
           </Typography>
           <Typography gutterBottom variant="h5" component="h5">
-           {rooms}
+            {rooms}
           </Typography>
           
         </CardContent>

@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import '../imports/startup/accounts-config.js';
 
 //Componentes
-import Hello from '../imports/ui/Hello';
 import Register from '../imports/ui/Register';
 import Login from '../imports/ui/Login';
 import ListRooms from '../imports/ui/ListRooms';
