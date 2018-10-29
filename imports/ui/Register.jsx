@@ -36,14 +36,13 @@ class Register extends Component {
         let newUser = {
             email:this.state.email,
             password:this.state.password,
-            profile:{
-                userID: Meteor.userId() ,  
-                profileImage:this.props.profileImage,
+            profile:{ 
+                profileImage:this.state.profileImage,
                 firstName:this.state.firstName,
                 lastName:this.state.lastName,
                 phoneNumber:this.state.phoneNumber,
-                profileFB: '',
-                profileTW: '',
+                profileFB: this.state.profileFB,
+                profileTW: this.state.profileTW,
                 type: 'Search',
                 rooms: []   
             }     
@@ -86,6 +85,7 @@ class Register extends Component {
             <TextField
             id="email"
             label="Email"
+            value={this.state.email}
             className='textField dense'
             onChange={(e) => this.handleChange(e)}
             margin="dense"
@@ -136,6 +136,7 @@ class Register extends Component {
             <TextField
             id="lastName"
             label="Last Name"
+            value={this.state.lastName}
             className={'textField dense'}
             onChange={(e) => this.handleChange(e)}
             margin="dense"
@@ -148,6 +149,7 @@ class Register extends Component {
             <TextField
             id="phoneNumber"
             label="Phone Number (Optional)"
+            value={this.state.phoneNumber}
             className='textField dense'
             onChange={(e) => this.handleChange(e)}
             margin="dense"
@@ -156,12 +158,13 @@ class Register extends Component {
             </Col>
             </Row>
             {/*Codigo para la otra entrega */}
-            {/*                 <Row justify={'center'}>
+            <Row justify={'center'}>
             <Col md={8}>
             <TextField
-            id="twACC"
+            id="profileTW"
             label="Twitter Account (Optional) Ex.@danielcagua4"
             className='textField dense'
+            value={this.state.profileTW}
             onChange={(e) => this.handleChange(e)}
             margin="dense"
             />
@@ -170,14 +173,15 @@ class Register extends Component {
             <Row justify={'center'}>
             <Col md={8}>
             <TextField
-            id="fbACC"
+            id="profileFB"
             label="Facebook Account (Optional)"
+            value={this.state.profileFB}
             className='textField dense'
             onChange={(e) => this.handleChange(e)}
             margin="dense"
             />
             </Col>
-        </Row> */}
+        </Row>
         
         <Button variant="contained" size="large" color="primary" className={'button'} onClick={this.handleSubmit}>Create User</Button>
         </form>
