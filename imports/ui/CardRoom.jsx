@@ -7,11 +7,17 @@ import CardMedia from '@material-ui/core/CardMedia';
 //import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+import {withRouter, Switch, Route, Link, Redirect} from 'react-router-dom';
 import '../styles/CardRoom';
 
 class CardRoom extends Component {
+
+
   render() {
+    
+    const {match} = this.props;
     return (
+
       <div>
         <Card className='card'>
           <CardHeader
@@ -23,7 +29,9 @@ class CardRoom extends Component {
             image={'/images/defaultRoom.jpg'}
           />
           <CardActions className='actions'>
-            <Button href={`/room/${this.props.room._id}`}>Ver Habitación</Button>
+            <Link to={`viewrooms/${this.props.room._id}`}>Click</Link>
+            <Button href={`viewrooms/${this.props.room._id}`}>Ver Habitación</Button>
+            <Button onClick={()=>{window.location.assign(`/${this.props.room._id}`);}}>Test</Button>
           </CardActions>
         </Card>
       </div>

@@ -17,7 +17,7 @@ export class ListRooms extends Component
             <Grid container justify="center" spacing={16}>
               {this.props.rooms.map(value => (
                 <Grid key={value._id} item>
-                  <CardRoom room={value}/>
+                  <CardRoom location={this.props.location} room={value}/>
                 </Grid>
               ))}
             </Grid>

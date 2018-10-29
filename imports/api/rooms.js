@@ -29,5 +29,13 @@ Meteor.methods({
     result[0].profile.rooms.push(id);
     console.log(result[0]);
     Meteor.users.update({username: room.owner}, {$set: {'profile.rooms': result[0].profile.rooms}});
+  },
+  'rooms.getRoom':function(id){
+    //console.log('fetching',id);
+    let room = Rooms.find({_id:id}).fetch();
+    //console.log(room);
+    if(typeof room != 'undefined'){
+      return room;
+    }
   }
 });

@@ -24,6 +24,8 @@ Meteor.methods({
     console.log('insertado',userID);
     let result = Meteor.users.find({username:user.firstName}).fetch();
     console.log(result[0].profile);
+  },
+  'users.register':function(user){
 
   },
   'users.findById'({userID}) {
@@ -45,12 +47,21 @@ Meteor.methods({
     Meteor.users.update(user[0].userID, rooms = roomsP);
     return user;
   },
-  'users.updateContactInfo'({userID},emailP,phoneNumberP,profileFBP,profileTWP) {
+  'users.updateContactInfo' ({userID},emailP,phoneNumberP,profileFBP,profileTWP) {
     const user = Meteor.users.findOne({userID: userID});
     Meteor.users.update(user[0].userID, email = emailP);
     Meteor.users.update(user[0].userID, phoneNumber = phoneNumberP);
     Meteor.users.update(user[0].userID, profleFB = profileFBP);
     Meteor.users.update(user[0].userID, profileTW = profileTWP);
     return user;
+  },
+  'users.findByUsername'(username) {
+    //console.log('me llego',username);
+    check(username, String);
+    const user = Meteor.users.find({username: username}).fetch();
+    //console.log(user);
+    if(typeof user != 'undefined'){
+      return user;
+    }
   }
 });

@@ -4,18 +4,23 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Container, Row, Col } from 'react-grid-system';
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import PropTypes from 'prop-types';
+import AccountsUIWrapper from './AccountsUIWrapper';
+import { Accounts } from "meteor/accounts-base";
 
 class Register extends Component {
     constructor(props){
         super(props);
         
         this.state = {
-            userID:'',  
+            userID:'',
+            password:'',  
             profileImage:'',
             firstName:'',
             lastName:'',
             email:'',
+            password:'',
             phoneNumber:'',
             profileFB: '',
             profileTW: '',
@@ -29,9 +34,9 @@ class Register extends Component {
     handleSubmit(event)
     {
         event.preventDefault();
-        Meteor.users
+        
         const newUser = {
-            userID:'',  
+            userID: Meteor.userId() ,  
             profileImage:this.props.profileImage,
             firstName:this.state.firstName,
             lastName:this.state.lastName,
@@ -44,7 +49,23 @@ class Register extends Component {
             rooms: {}
         };
         console.log('newUser',newUser);
-        Meteor.call('users.add',newUser)
+        if (password!=="" && password!==null)
+        {
+            Accounts.createUser(newUser, function(err){
+                if(err)
+                {
+                    console.log(err);
+                    alert("Error: User cannot be created");
+                }
+                else
+                {
+                    alert("User registration succesfull");
+                }
+            })
+        }
+        else{
+            alert("Not valid password")
+        }
         
     }
     
@@ -171,7 +192,12 @@ Register.propTypes = {
 };
 
 export default withTracker(() => {
+<<<<<<< HEAD
+    Meteor.subscribe('users')
+=======
+    Meteor.subscribe('users');
+>>>>>>> 797027dbe173dc74537b668f4f414f8fe61171dd
     return {
-        user: Meteor.user()
+        users: Meteor.users.find({}).fetch()
     };
 })(Register);
