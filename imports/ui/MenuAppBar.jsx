@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -16,6 +17,7 @@ import Menu from '@material-ui/core/Menu';
 import { Meteor } from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import AccountsUIWrapper from './AccountsUIWrapper';
+import '../styles/MenuAppBar.css';
 
 const styles = {
   root: {
@@ -48,6 +50,53 @@ class MenuAppBar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  handleLogout = () => {
+    Meteor.logout((err,result) => {
+      if(err){console.log(err)}
+      window.location.assign('/');
+    });
+  };
+
+  handleLogin = () => {
+      window.location.assign('/login');
+  };
+
+  handleOffer = () => {
+    window.location.assign('/addroom');
+};
+
+  handleViewRooms = () => {
+    window.location.assign('/viewrooms');
+};
+
+  renderMenu(){
+    if(!Meteor.user()){
+      return(
+        <Button variant="contained"
+        className={'button'}
+        onClick={this.handleLogin}
+        >
+        Iniciar Sesion
+          <AccountCircle />
+        </Button>
+      );
+    }
+    else{
+      return(
+        <Button variant="contained"
+                color="primary" 
+                className={'button'}
+                aria-owns={open ? 'menu-appbar' : undefined}
+                aria-haspopup="true"
+                onClick={this.handleMenu}
+                >
+          {this.props.user!=undefined?this.props.user.emails[0].address:'Iniciar Sesion'}
+          <AccountCircle />
+        </Button>
+      );
+    }
+  }
+
   render() {
     const { classes } = this.props;
     const { auth, anchorEl } = this.state;
@@ -56,23 +105,26 @@ class MenuAppBar extends React.Component {
     return (
       <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-      <AccountsUIWrapper/>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              Find a Roomie - Web Dev Uniandes
+              Find a Roomie
             </Typography>
+            <Button variant="outlined"
+                    id={'boton-navbar1'}
+                    className={'button'}
+                    onClick={this.handleOffer}
+                    >
+            Ofrecer
+            </Button>
+            <Button variant="outlined"
+                    id={'boton-navbar1'}
+                    className={'button'}
+                    onClick={this.handleViewRooms}
+                    >
+            Buscar Habitaciones
+            </Button>
             {auth && (
               <div>
-                <IconButton
-                  aria-owns={open ? 'menu-appbar' : undefined}
-                  aria-haspopup="true"
-                  onClick={this.handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
+                {this.renderMenu()}
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -87,7 +139,7 @@ class MenuAppBar extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={this.handleLogout}>Cerrar Sesion</MenuItem>
                   <MenuItem onClick={this.handleClose}>My account</MenuItem>
                 </Menu>
               </div>
@@ -102,14 +154,11 @@ MenuAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MenuAppBar);
-
-MenuAppBar.propTypes = {
-  user: PropTypes.object
-};
-
-withTracker(() => {  
+export default withStyles(styles)(withTracker(() => {  
+  Meteor.subscribe('users');
   return {
     user: Meteor.user()
   };
-})(MenuAppBar);
+})(MenuAppBar));
+
+
