@@ -127,20 +127,27 @@ class RoomView extends Component {
           </Row>
           <Row justify={'between'}>
             <Col md={4}>
-              <UserCard
-                profileImage={ownerRoom.profile.profileImage? ownerRoom.profile.profileImage :'default-user'}
-                firstName={ownerRoom.profile.firstName}
-                lastName={ownerRoom.profile.lastName}
-                description={ownerRoom.lastName}
-                type={ownerRoom.type}
-                rooms={ownerRoom.rooms}
-              />
-              <ModalImage
-                small={clCore.url('test_jgno3t.jpg' ,{height: 100, width: 150, crop: 'limit'})}
-                large={clCore.url('test_jgno3t.jpg' ,{quality: 'auto', fetchFormat: 'auto'})}
-                hideDownload={true}
-                hideZoom={true}
-              />
+              <Row justify={'center'} style={{marginTop : 20 , marginBottom:20}}>
+                <UserCard
+                  profileImage={ownerRoom.profile.profileImage? ownerRoom.profile.profileImage :'default-user'}
+                  firstName={ownerRoom.profile.firstName}
+                  lastName={ownerRoom.profile.lastName}
+                  description={ownerRoom.lastName}
+                  type={ownerRoom.type}
+                  rooms={ownerRoom.rooms}
+                />
+              </Row>
+              <Row justify={'center'} style={{marginTop : 20 , marginBottom:20}}>
+                {room.images.map( i => {
+                  return (<ModalImage
+                    key = {i}
+                    small={clCore.url(i ,{height: 100, width: 150, crop: 'limit'})}
+                    large={clCore.url(i ,{quality: 'auto', fetchFormat: 'auto'})}
+                    hideDownload={true}
+                    hideZoom={true}
+                  />);
+                })}
+              </Row>
             </Col>
             {this.renderRoomData(room)}
           </Row>

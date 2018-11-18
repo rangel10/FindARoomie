@@ -23,7 +23,8 @@ Meteor.methods({
       sector:room.sector,
       direccion:room.direccion,
       servicios:room.servicios,
-      reglas:room.reglas
+      reglas:room.reglas,
+      images:room.images
     });
     console.log('insertado',id);
     return id;
