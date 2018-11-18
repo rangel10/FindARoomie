@@ -87,7 +87,7 @@ class AddRoom extends Component {
         <Container>
           <form action="">
           <Row justify={'center'}>
-              <Col md={8}>
+              <Col md={10}>
               <TextField
           id="titulo"
           label="Titulo"
@@ -172,15 +172,17 @@ class AddRoom extends Component {
             <Row justify={'center'}> 
               <FormControl component="fieldset" className={'formControl'}>
                 <FormLabel component="legend">Con que servicios cuenta?</FormLabel>
-                <FormGroup>
+                <FormGroup row>
+
                   {services.map(item => (
+                    <Col md={3} key={item}> 
                     <FormControlLabel
-                    key={item}
+                    
                     control={
                       <Checkbox onChange={this.handleCheckChange} checked={this.state.checkedItems.get(item.name)} value={item} />
                     }
                     label={item}
-                    />
+                    /></Col>
                     ))}
                 </FormGroup>
               </FormControl>

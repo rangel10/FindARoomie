@@ -81,7 +81,7 @@ class Register extends Component {
         const url = `https://api.cloudinary.com/v1_1/farappcloud/upload`;
         const title = 'profilePic';
         const public_id = Date.now()
-        this.setState({profileImage:public_id});
+        this.setState({profileImage:public_id.toString()});
         let file = files[0]
             const photoId = this.photoId++;
             const fileName = file.name;

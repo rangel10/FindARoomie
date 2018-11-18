@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import cl from 'cloudinary-core';
 
 const styles = {
   card: {
@@ -20,6 +21,7 @@ const styles = {
 };
 
 function ImgMediaCard(props) {
+  const clCore = new cl.Cloudinary({cloud_name: 'farappcloud'});
   const { classes } = props;
   let {
     profileImage,
@@ -33,31 +35,31 @@ function ImgMediaCard(props) {
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
-          component="img"
-          alt="UserInfo"
+          component='img'
+          alt='UserInfo'
           className={classes.media}
-          height="140"
-          image={profileImage}
-          title="UserInfo"
+          height='140'
+          image={clCore.url(profileImage ,{width: 240, crop: 'scale'})}
+          title='UserInfo'
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant='h5' component='h2'>
             Dueño: {firstName} {lastName}
           </Typography>
-          <Typography gutterBottom variant="h5" component="h5">
+          <Typography gutterBottom variant='h5' component='h5'>
             {type}
           </Typography>
-          <Typography component="p">
+          <Typography component='p'>
             {description}
           </Typography>
-          <Typography gutterBottom variant="h5" component="h5">
+          <Typography gutterBottom variant='h5' component='h5'>
             {rooms}
           </Typography>
           
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size='small' color='primary'>
           Contact
         </Button>
       </CardActions>
