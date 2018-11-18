@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import { Container, Row, Col } from 'react-grid-system';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import request from 'superagent';
+import '../styles/Register.css';
 import PropTypes from 'prop-types';
 
 class Register extends Component {
@@ -27,6 +29,7 @@ class Register extends Component {
         };
         
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onPhotoSelected = this.onPhotoSelected.bind(this);
     }
     
     handleSubmit(event)
@@ -73,6 +76,34 @@ class Register extends Component {
             [event.target.id]: event.target.value,
         });
     };
+
+    onPhotoSelected(files) {
+        const url = `https://api.cloudinary.com/v1_1/farappcloud/upload`;
+        const title = 'profilePic';
+        const public_id = Date.now()
+        this.setState({profileImage:public_id});
+        let file = files[0]
+            const photoId = this.photoId++;
+            const fileName = file.name;
+            request.post(url)
+                .field('upload_preset', 'gmhku0ka')
+                .field('file', file)
+                .field('public_id', public_id)
+                .field('tags', title ? `myphotoalbum,${title}` : 'myphotoalbum')
+                .field('context', title ? `photo=${title}` : '')
+                .on('progress', (progress) => this.onPhotoUploadProgress(photoId, file.name, progress))
+                .end((error, response) => {
+                    this.onPhotoUploaded(photoId, fileName, response);
+                });
+    }
+
+    onPhotoUploadProgress(id, fileName, progress) {
+        console.log(id,fileName,progress);
+    }
+
+    onPhotoUploaded(id, fileName, response) {
+        console.log(id,fileName,response.body);
+    }
     
     render() {  
         return (
@@ -80,6 +111,29 @@ class Register extends Component {
             <h1>Add New User</h1>
             <Container>
             <form action="">
+            <Row justify={'center'}>
+            <Col md={8}>
+            <input
+                accept="image/*"
+                className='input'
+                id="contained-button-file"
+                type="file"
+                ref={fileInputEl =>
+                    (this.fileInputEl = fileInputEl)
+                }
+                onChange={() =>
+                    this.onPhotoSelected(
+                        this.fileInputEl.files
+                    )
+                }
+            />
+            <label htmlFor="contained-button-file">
+                <Button letiant="contained" component="span" className='button'>
+                Upload
+                </Button>
+            </label>
+            </Col>
+            </Row>
             <Row justify={'center'}>
             <Col md={8}>
             <TextField
@@ -102,19 +156,6 @@ class Register extends Component {
             onChange={(e) => this.handleChange(e)}
             margin="dense"
             type="password"
-            />
-            </Col>
-            </Row>
-            <Row justify={'center'}>
-            <Col md={8}>
-            <TextField
-            id="profileImage"
-            label="Profile Image (Optional) (Enter the URL of the img)"
-            value={this.state.profileImage}
-            onChange={(e) => this.handleChange(e)}
-            type="text"
-            className={'textField dense'}
-            margin="dense"
             />
             </Col>
             </Row>
@@ -183,7 +224,7 @@ class Register extends Component {
             </Col>
         </Row>
         
-        <Button variant="contained" size="large" color="primary" className={'button'} onClick={this.handleSubmit}>Create User</Button>
+        <Button letiant="contained" size="large" color="primary" className={'button'} onClick={this.handleSubmit}>Create User</Button>
         </form>
         </Container>
         </div>

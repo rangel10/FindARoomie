@@ -127,7 +127,9 @@ class RoomView extends Component {
             <Row justify={'between'}>
               <Col md={4}>
                 <UserCard
-                  profileImage='https://static.thenounproject.com/png/17241-200.png'
+                  profileImage={ownerRoom.profile.profileImage?
+                    `https://res.cloudinary.com/farappcloud/image/upload/${ownerRoom.profile.profileImage}`:
+                    'https://res.cloudinary.com/farappcloud/image/upload/default-user'}
                   firstName={ownerRoom.profile.firstName}
                   lastName={ownerRoom.profile.lastName}
                   description={ownerRoom.lastName}
