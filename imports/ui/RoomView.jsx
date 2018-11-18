@@ -138,7 +138,7 @@ class RoomView extends Component {
                 />
               </Row>
               <Row justify={'center'} style={{marginTop : 20 , marginBottom:20}}>
-                {room.images.map( i => {
+                {room.images?room.images.map( i => {
                   return (<ModalImage
                     key = {i}
                     small={clCore.url(i ,{height: 100, width: 150, crop: 'limit'})}
@@ -146,7 +146,7 @@ class RoomView extends Component {
                     hideDownload={true}
                     hideZoom={true}
                   />);
-                })}
+                }):(<div></div>)}
               </Row>
             </Col>
             {this.renderRoomData(room)}
