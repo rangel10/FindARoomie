@@ -6,6 +6,7 @@ import './env.js';
 // import  '../imports/api/players.js';
 import '../imports/api/users.js';
 import '../imports/api/rooms.js';
+import '../imports/api/chatRoom.js';
 
 
 Meteor.startup(() => {

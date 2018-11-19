@@ -129,6 +129,7 @@ class RoomView extends Component {
             <Col md={4}>
               <Row justify={'center'} style={{marginTop : 20 , marginBottom:20}}>
                 <UserCard
+                  id={ownerRoom._id}
                   profileImage={ownerRoom.profile.profileImage? ownerRoom.profile.profileImage :'default-user'}
                   firstName={ownerRoom.profile.firstName}
                   lastName={ownerRoom.profile.lastName}

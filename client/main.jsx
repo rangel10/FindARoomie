@@ -12,6 +12,7 @@ import ListRooms from '../imports/ui/ListRooms';
 import RoomView from '../imports/ui/RoomView';
 import AddRoom from '../imports/ui/AddRoom';
 import LandingPage from '../imports/ui/LandingPage.jsx';
+import ContactVIew from '../imports/ui/ContactVIew';
 //import '../imports/startup/Routes';
 
 Meteor.startup(() => {
@@ -25,6 +26,12 @@ Meteor.startup(() => {
           <Route exact path="/addroom" component={AddRoom}/>
           <Route exact path="/viewrooms" component={ListRooms}/>
           <Route exact path="/viewrooms/:roomId" component={RoomView}/>
+          <Route exact path="/viewrooms/chatRoom/:userId" component={ContactVIew}/>
+          {/* <Route 
+            path="/chatRoom" 
+            render={(props) => <ContactVIew {...props}
+            />} 
+          /> */}
         </Switch>
       </App>
     </Router>
