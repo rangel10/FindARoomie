@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {withTracker} from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { withRouter } from 'react-router-dom';
 import '../styles/Login.css';
 
 export default class Login extends Component {

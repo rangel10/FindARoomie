@@ -237,7 +237,7 @@ onPhotoUploaded(id,total, fileName, response) {
                       />
                 <label htmlFor="contained-button-file">
                     <Button letiant="contained" component="span" className='button'>
-                    Upload
+                    Cargar Imagenes
                     </Button>
                 </label>
                 </Col>

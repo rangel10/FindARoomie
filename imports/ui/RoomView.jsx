@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
-import { Rooms } from '../api/rooms';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
 import { Container, Row, Col } from 'react-grid-system';
 import UserCard from './UserCard';
 import Paper from '@material-ui/core/Paper';
