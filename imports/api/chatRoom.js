@@ -11,16 +11,33 @@ if(Meteor.isServer){
 }
 
 Meteor.methods({
-  'chatrooms.createRoom': function(user1,user2){
-    let idChat = ChatRooms.upsert(
+  'chatrooms.createRoom': function(usersrc,userdst){
+    /* let idChat = ChatRooms.upsert(
+      {$or:[{user1:usersrc,user2:userdst},{user1:userdst,user2:usersrc}]},
       {
-        user1:user1,
-        user2:user2},
-      {
-        user1:user1,
-        user2:user2,
+        user1:usersrc,
+        user2:userdst,
         messages:[]
-      });
-    console.log(idChat);
+      }); */
+    let idRoom = ChatRooms.findOne(
+      {$or:[{user1:usersrc,user2:userdst},{user1:userdst,user2:usersrc}]});
+    console.log(idRoom);
+    if (idRoom === undefined){
+      console.log('creando sala');
+      idRoom = ChatRooms.insert(
+        {
+          user1:usersrc,
+          user2:userdst,
+          messages:[]
+        });
+      console.log(idRoom);
+    }
+    return idRoom;
+  },
+  'chatrooms.sendMessage': function(message,userSrc,userDst){
+    ChatRooms.update(
+      {$or:[{user1:userSrc,user2:userDst},{user1:userDst,user2:userSrc}]},
+      {$push:{messages:{time:Date.now(),user:userSrc,text:message}}},{},(err,i) => {console.log(err,i);});
+    console.log(message,'sent');
   }
 });

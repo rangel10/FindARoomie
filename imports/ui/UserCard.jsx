@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {Meteor} from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -32,7 +33,8 @@ function UserCard(props) {
     lastName,
     description,
     type,
-    rooms
+    rooms,
+    user1
   }=props;
   return (
     <Card className={classes.card}>
@@ -66,7 +68,8 @@ function UserCard(props) {
         {id!=Meteor.user()._id?
           <Button size='small' color='primary'
             onClick={() => {
-              window.location.assign(`chatRoom/${id}`);}}
+              Meteor.call('chatrooms.createRoom',user1._id,id);
+              window.location.assign('/notifications');}}
           >
           Contact
           </Button>:
@@ -83,4 +86,9 @@ UserCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(UserCard);
+export default withTracker(() => {
+  Meteor.subscribe('chatrooms');
+  return {
+    user1: Meteor.user()
+  };
+}) (withStyles(styles)(UserCard));
