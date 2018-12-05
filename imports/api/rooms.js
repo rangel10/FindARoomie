@@ -6,8 +6,12 @@ import { Accounts } from 'meteor/accounts-base';
 export const Rooms = new Mongo.Collection('rooms');
 
 if(Meteor.isServer){
-  Meteor.publish('rooms', () =>{
-    return Rooms.find({});
+  Meteor.publish('rooms', num =>{
+    const options = {
+      sort: {createdAt:-1},
+      limit:num
+    };
+    return Rooms.find({}, options);
   });
 }
 

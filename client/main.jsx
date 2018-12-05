@@ -25,7 +25,7 @@ Meteor.startup(() => {
           <Route exact path="/register" component={Register}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/addroom" component={AddRoom}/>
-          <Route exact path="/viewrooms" component={ListRooms}/>
+          <Route exact path="/viewrooms" render={(props) => <ListRooms {...props} limit={10} />}/>
           <Route exact path="/viewrooms/:roomId" component={RoomView}/>
           <Route exact path="/viewrooms/chatRoom/:userId" component={ChatRoom}/>
           <Route exact path="/notifications" component={Notifications}/>
