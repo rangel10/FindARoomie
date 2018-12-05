@@ -5,14 +5,12 @@ import { Meteor } from 'meteor/meteor';
 import { Rooms } from '../api/rooms';
 import Grid from '@material-ui/core/Grid';
 import CardRoom from './CardRoom';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 class ListRooms extends Component{
   constructor(props){
     super(props);
 
-    this.state = {
-      message:'not at bottom'
-    };
     this.handleScroll = this.handleScroll.bind(this);
   }
 
@@ -23,13 +21,7 @@ class ListRooms extends Component{
     const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
     const windowBottom = windowHeight + window.pageYOffset;
     if (windowBottom >= docHeight) {
-      this.setState({
-        message:'bottom reached'
-      });
-    } else {
-      this.setState({
-        message:'not at bottom'
-      });
+      this.props.increaseLimit(6);
     }
   }
 
@@ -45,7 +37,6 @@ class ListRooms extends Component{
   {
     return (
       <div>
-        <div className='fixedDiv'>{this.state.message}</div>
         <div className='scrollDiv'></div>
         <Grid container className='root' spacing={16}>
           <Grid item xs={12}>
@@ -58,6 +49,7 @@ class ListRooms extends Component{
             </Grid>
           </Grid>
         </Grid>
+        <button onClick={() => this.props.increaseLimit(6)}>load more</button>
       </div>
     );
   }
@@ -68,10 +60,13 @@ ListRooms.propTypes ={
   rooms: PropTypes.array.isRequired
 };
 
-export default withTracker(({limit}) => 
+const limite = new ReactiveVar(10);
+
+export default withTracker(() => 
 {
-  Meteor.subscribe('rooms',limit!==undefined?limit:1);
+  Meteor.subscribe('rooms',limite.get());
   return {
-    rooms: Rooms.find({},{sort:{createdAt:-1},limit}).fetch()
+    rooms: Rooms.find({},{sort:{createdAt:-1},limite:limite.get()}).fetch(),
+    increaseLimit: (n) => {limite.set(limite.get()+n);console.log('limite es',limite.get());},
   };
 })(ListRooms);
