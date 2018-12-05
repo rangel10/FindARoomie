@@ -11,6 +11,7 @@ if(Meteor.isServer){
       sort: {createdAt:-1},
       limit:num
     };
+    console.log(options);
     return Rooms.find({}, options);
   });
 }

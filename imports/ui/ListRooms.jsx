@@ -70,8 +70,8 @@ ListRooms.propTypes ={
 
 export default withTracker(({limit}) => 
 {
-  Meteor.subscribe('rooms',limit);
+  Meteor.subscribe('rooms',limit!==undefined?limit:1);
   return {
-    rooms: Rooms.find({}).fetch()
+    rooms: Rooms.find({},{sort:{createdAt:-1},limit}).fetch()
   };
 })(ListRooms);
