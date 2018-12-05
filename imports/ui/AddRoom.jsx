@@ -28,7 +28,8 @@ class AddRoom extends Component {
       direccion:'',
       servicios:[],
       reglas:[],
-      images:[]
+      images:[],
+      errors: {}
     };
 
     this.handleCheckChange = this.handleCheckChange.bind(this);
@@ -42,6 +43,7 @@ class AddRoom extends Component {
   }
 
   handleSubmit(){
+    if(this.validateForm()){
     let selected = []
     this.state.checkedItems.forEach((value,key) => {
       if(value){selected.push(key)}
@@ -71,7 +73,97 @@ class AddRoom extends Component {
         }
       )
     })
+  }
     
+  }
+
+  validateForm()
+  {
+    console.log("Validando la habitacion a Crear")
+    let errors = {};
+    let formIsValid = true;
+    let titulo = this.state.titulo;
+    let descripcion = this.state.descripcion;
+    let precio = this.state.precio;
+    let tamano = this.state.tamano;
+    let sector = this.state.sector;
+    let direccion = this.state.direccion;
+    let reglas = this.state.reglas;
+    console.log("Variables");
+    console.log(titulo);
+    console.log(descripcion);
+    console.log(precio);
+    console.log(tamano);
+    console.log(sector);
+    console.log(direccion);
+    console.log(reglas);
+
+    if (!titulo) {
+      formIsValid = false;
+      errors["titulo"] = "Ingresa un Titulo";
+    }
+
+    if (typeof titulo !== "undefined") {
+      if (!titulo.match(/^[a-zA-Z]{5,15}$/)) {
+        formIsValid = false;
+        errors["titulo"] = "Ingresa un Titulo Valido. (Debe tener entre 5 y 15 caracteres alfabeticos)";
+      }
+    }
+    if (!descripcion) {
+      formIsValid = false;
+      errors["descripcion"] = "Ingresa una descripcion";
+    }
+
+    if (typeof descripcion !== "undefined") {
+      if (!descripcion.match(/^[a-zA-Z]{50,150}$/)) {
+        formIsValid = false;
+        errors["descripcion"] = "Ingresa una Descripcion Valida. (Debe tener entre 50 y 150 caracteres)";
+      }
+    }
+    if (!precio) {
+      formIsValid = false;
+      errors["precio"] = "Ingresa un Precio";
+    }
+
+    if (typeof precio !== "undefined") {
+      if (!precio.match(/^[0-9]*$/)) {
+        formIsValid = false;
+        errors["precio"] = "Ingresa un Precio Valido. (Debe tener solo numeros)";
+      }
+    }
+    if (!tamano) {
+      formIsValid = false;
+      errors["tamano"] = "Ingresa un Tamaño";
+    }
+
+    if (typeof tamano !== "undefined") {
+      if (!tamano.match(/^[0-9]*$/)) {
+        formIsValid = false;
+        errors["tamano"] = "Ingresa un Tamaño Valido. (Debe tener solo numeros)";
+      }
+    }
+
+    if (!sector) {
+      formIsValid = false;
+      errors["sector"] = "Ingresa el Sector";
+    }
+
+    if (typeof sector !== "undefined") {
+      if (!sector.match(/^[a-zA-Z ]*$/)) {
+        formIsValid = false;
+        errors["sector"] = "Ingresa un Sector Valido. (Debe tener solamente caracteres alfabeticos)";
+      }
+    }
+    if (!direccion) {
+      formIsValid = false;
+      errors["direccion"] = "Ingresa la Direccion";
+    }
+
+    this.setState({
+      errors: errors
+    });
+    return formIsValid;
+
   }
 
   onPhotoSelected(files) {
@@ -142,6 +234,7 @@ onPhotoUploaded(id,total, fileName, response) {
           margin="dense"
           />
             </Row>
+            <div className="errorMsg">{this.state.errors.titulo}</div>
           <Row justify={'center'} style={{width:'100%'}}>
               <TextField
           id="descripcion"
@@ -152,6 +245,7 @@ onPhotoUploaded(id,total, fileName, response) {
           onChange={(e) => this.handleChange(e)}
           />
             </Row>
+            <div className="errorMsg">{this.state.errors.descripcion}</div>
           <Row justify={'center'} style={{width:'100%'}}>
                 <TextField
                   id="precio"
@@ -163,6 +257,7 @@ onPhotoUploaded(id,total, fileName, response) {
                   margin="dense"
                   />
             </Row>
+            <div className="errorMsg">{this.state.errors.precio}</div>
           <Row justify={'center'} style={{width:'100%'}}>
                 <TextField
                   id="tamano"
@@ -174,6 +269,7 @@ onPhotoUploaded(id,total, fileName, response) {
                   margin="dense"
                   />
             </Row>
+            <div className="errorMsg">{this.state.errors.tamano}</div>
           <Row justify={'center'} style={{width:'100%'}}>
                 <TextField
                   id="sector"
@@ -183,6 +279,7 @@ onPhotoUploaded(id,total, fileName, response) {
                   margin="dense"
                   />
             </Row>
+            <div className="errorMsg">{this.state.errors.sector}</div>
           <Row justify={'center'} style={{width:'100%'}}>
                 <TextField
                   id="direccion"
@@ -192,6 +289,7 @@ onPhotoUploaded(id,total, fileName, response) {
                   margin="dense"
                   />
             </Row>
+            <div className="errorMsg">{this.state.errors.direccion}</div>
           <Row justify={'center'} style={{width:'100%'}}>
               <TextField
           id="reglas"
@@ -202,6 +300,7 @@ onPhotoUploaded(id,total, fileName, response) {
           onChange={(e) => this.handleChange(e)}
           />
             </Row>
+          <div className="errorMsg">{this.state.errors.reglas}</div>
           <Row justify={'center'} style={{width:'100%',marginTop : 20 , marginBottom:20}}> 
               <FormControl component="fieldset" className={'formControl'}>
                 <FormLabel component="legend">Con que servicios cuenta?</FormLabel>

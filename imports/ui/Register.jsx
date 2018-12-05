@@ -75,7 +75,7 @@ class Register extends Component {
     }
 
     validateForm() {
-        console.log("Entre a validar la wea");
+        console.log("Validando el Usuario");
 
         let errors = {};
         let formIsValid = true;
@@ -111,13 +111,13 @@ class Register extends Component {
           if (typeof password !== "undefined") {
             if (!password.match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
               formIsValid = false;
-              errors["password"] = "Ingrese un Password. (Debe tener 1 numero, 1 letra mayuscula y 1 letra minuscula)";
+              errors["password"] = "Ingrese un Password. (Debe tener 8 o mas caracteres, 1 numero, 1 letra mayuscula, 1 letra minuscula y un caracter especial)";
             }
           }
 
           if (!firstName) {
             formIsValid = false;
-            errors["firstName"] = "*Ingresa tu Nombre";
+            errors["firstName"] = "Ingresa tu Nombre";
           }
     
           if (typeof firstName !== "undefined") {
