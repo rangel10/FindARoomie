@@ -25,9 +25,11 @@ class Register extends Component {
             profileFB: '',
             profileTW: '',
             type: 'Search',
-            rooms: {}
+            rooms: {},
+            errors: {}
         };
         
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onPhotoSelected = this.onPhotoSelected.bind(this);
     }
@@ -35,7 +37,7 @@ class Register extends Component {
     handleSubmit(event)
     {
         event.preventDefault();
-        
+        if(this.validateForm()){
         let newUser = {
             email:this.state.email,
             password:this.state.password,
@@ -68,7 +70,79 @@ class Register extends Component {
         else{
             alert("Not valid password")
         }
+    }
         
+    }
+
+    validateForm() {
+        console.log("Entre a validar la wea");
+
+        let errors = {};
+        let formIsValid = true;
+        let email=this.state.email;
+        let password=this.state.password;
+        let firstName=this.state.firstName;
+        let lastName=this.state.lastName;
+        console.log("Variables");
+        console.log(email);
+        console.log(password);
+        console.log(firstName);
+        console.log(lastName);
+        
+          if (!email) 
+          {
+            formIsValid = false;
+            errors["email"] = "Ingresa un Email.";
+          }
+    
+          if (typeof email !== "undefined") {
+            //regular expression for email validation
+            var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            if (!pattern.test(email)) {
+              formIsValid = false;
+              errors["email"] = "*Ingresa un Email Valido.";
+            }
+          }
+          if (!password) {
+            formIsValid = false;
+            errors["password"] = "Ingresa un Password.";
+          }
+    
+          if (typeof password !== "undefined") {
+            if (!password.match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
+              formIsValid = false;
+              errors["password"] = "Ingrese un Password. (Debe tener 1 numero, 1 letra mayuscula y 1 letra minuscula)";
+            }
+          }
+
+          if (!firstName) {
+            formIsValid = false;
+            errors["firstName"] = "*Ingresa tu Nombre";
+          }
+    
+          if (typeof firstName !== "undefined") {
+            if (!firstName.match(/^[a-zA-Z ]*$/)) {
+              formIsValid = false;
+              errors["firstName"] = "Ingresa un Nombre Valido. (Debe tener solamente caracteres alfabeticos)";
+            }
+          }
+
+          if (!lastName) {
+            formIsValid = false;
+            errors["lastName"] = "Ingresa tu apellido";
+          }
+    
+          if (typeof lastName !== "undefined") {
+            if (!lastName.match(/^[a-zA-Z ]*$/)) {
+              formIsValid = false;
+              errors["lastName"] = "Ingresa un Apellido Valido. (Debe tener solamente caracteres alfabeticos)";
+            }
+          }
+
+          this.setState({
+            errors: errors
+          });
+          return formIsValid;
     }
     
     handleChange = event => {
@@ -108,7 +182,7 @@ class Register extends Component {
     render() {  
         return (
             <div className='root'> 
-            <h1>Add New User</h1>
+            <h1>Formulario de Nuevo Usuario</h1>
             <Container>
             <form action="">
             <Row justify={'center'}>
@@ -129,7 +203,7 @@ class Register extends Component {
             />
             <label htmlFor="contained-button-file">
                 <Button letiant="contained" component="span" className='button'>
-                Upload
+                Cargar Imagen
                 </Button>
             </label>
             </Col>
@@ -143,9 +217,11 @@ class Register extends Component {
             className='textField dense'
             onChange={(e) => this.handleChange(e)}
             margin="dense"
+            required
             />
             </Col>
             </Row>
+            <div className="errorMsg">{this.state.errors.email}</div>
             <Row justify={'center'}>
             <Col md={8}>
             <TextField
@@ -156,40 +232,45 @@ class Register extends Component {
             onChange={(e) => this.handleChange(e)}
             margin="dense"
             type="password"
+            required
             />
             </Col>
             </Row>
+            <div className="errorMsg">{this.state.errors.password}</div>
             <Row justify={'center'}>
             <Col md={8}>
             <TextField
             id="firstName"
-            label="First Name"
+            label="Nombre"
             value={this.state.firstName}
             onChange={(e) => this.handleChange(e)}
             type="text"
             className={'textField dense'}
             margin="dense"
+            required
             />
             </Col>
             </Row>
+            <div className="errorMsg">{this.state.errors.firstName}</div>
             <Row justify={'center'}>
             <Col md={8}>
             <TextField
             id="lastName"
-            label="Last Name"
+            label="Apellido"
             value={this.state.lastName}
             className={'textField dense'}
             onChange={(e) => this.handleChange(e)}
             margin="dense"
+            required
             />
             </Col>
             </Row>
-            
+            <div className="errorMsg">{this.state.errors.lastName}</div>
             <Row justify={'center'}>
             <Col md={8}>
             <TextField
             id="phoneNumber"
-            label="Phone Number (Optional)"
+            label="Número Telefónico (Opcional)"
             value={this.state.phoneNumber}
             className='textField dense'
             onChange={(e) => this.handleChange(e)}
@@ -203,7 +284,7 @@ class Register extends Component {
             <Col md={8}>
             <TextField
             id="profileTW"
-            label="Twitter Account (Optional) Ex.@danielcagua4"
+            label="Usuario de Twitter (Opcional) Ex.@danielcagua4"
             className='textField dense'
             value={this.state.profileTW}
             onChange={(e) => this.handleChange(e)}
@@ -215,7 +296,7 @@ class Register extends Component {
             <Col md={8}>
             <TextField
             id="profileFB"
-            label="Facebook Account (Optional)"
+            label="Usuario de Facebook (Opcional)"
             value={this.state.profileFB}
             className='textField dense'
             onChange={(e) => this.handleChange(e)}
@@ -224,7 +305,7 @@ class Register extends Component {
             </Col>
         </Row>
         
-        <Button letiant="contained" size="large" color="primary" className={'button'} onClick={this.handleSubmit}>Create User</Button>
+        <Button letiant="contained" size="large" color="primary" className={'button'} onClick={this.handleSubmit}>Crear Usuario</Button>
         </form>
         </Container>
         </div>
