@@ -3,6 +3,10 @@
   padding: 5% 5%;
 }
 
+.fill {
+	width: -webkit-fill-available;
+}
+
 /* CSS talk bubble */
 .talk-bubble {
 	margin-right: 40px;

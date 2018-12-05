@@ -73,5 +73,10 @@ Meteor.methods({
       rooms.push(roomid);
       Meteor.users.update({_id:userid},{$set: {'profile.rooms': rooms}});
     }
+  },
+  'users.getNameByID'(idUser){
+    const user = Meteor.users.findOne({_id: idUser},{fields:{profile:1,_id:0}});
+    console.log(user.profile.firstName +' '+user.profile.lastName);
+    return user.profile.firstName +' '+user.profile.lastName;
   }
 });

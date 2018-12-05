@@ -27,6 +27,17 @@ class  Notifications extends Component {
     this.setState({ currentChat: index });
   };
 
+  async getName(c){
+    let r = '';
+    await Meteor.call('users.getNameByID',c.user2,(err,res) => {
+      if(err){console.log(err);}
+      console.log(res);
+      r += res;
+    });
+    console.log(r);
+    return r;
+  }
+
   render() {
     return ( this.props.loading ? <div></div> :
       <div>
@@ -66,6 +77,7 @@ class  Notifications extends Component {
 
 export default withTracker(() => {
   const handle = Meteor.subscribe('chatrooms');
+  Meteor.subscribe('users');
   console.log(Meteor.userId());
   return {
     loading:!handle.ready(),

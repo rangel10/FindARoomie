@@ -55,6 +55,7 @@ class ChatRoom extends Component {
         </Paper>
         <Row>
           <Input
+            style={{minWidth: '50vw',height:'5vh'}}
             id="sendMessage"
             type='text'
             value={this.state.sendMessage}
