@@ -12,6 +12,8 @@ if(Meteor.isServer){
 
 Meteor.methods({
   'chatrooms.createRoom': function(usersrc,userdst){
+    // Code Review - Ricardo Andres Angel Villadiego
+    // No mantener codigo documentado en esta forma, es mejor eliminarlo si no se usa
     /* let idChat = ChatRooms.upsert(
       {$or:[{user1:usersrc,user2:userdst},{user1:userdst,user2:usersrc}]},
       {
@@ -23,7 +25,9 @@ Meteor.methods({
       {$or:[{user1:usersrc,user2:userdst},{user1:userdst,user2:usersrc}]});
     console.log(idRoom);
     if (idRoom === undefined){
-      console.log('creando sala');
+      // Code Review - Ricardo Andres Angel Villadiego
+      // Quitar logs despues de debuguear
+      console.log('creando sala');   
       idRoom = ChatRooms.insert(
         {
           user1:usersrc,
