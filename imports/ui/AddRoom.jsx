@@ -114,12 +114,12 @@ class AddRoom extends Component {
       errors['descripcion'] = 'Ingresa una descripcion';
     }
 
-    if (typeof descripcion !== 'undefined') {
+    /* if (typeof descripcion !== 'undefined') {
       if (!descripcion.match(/^[a-zA-Z]{50,150}$/)) {
         formIsValid = false;
         errors['descripcion'] = 'Ingresa una Descripcion Valida. (Debe tener entre 50 y 150 caracteres)';
       }
-    }
+    } */
     if (!precio) {
       formIsValid = false;
       errors['precio'] = 'Ingresa un Precio';
