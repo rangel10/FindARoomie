@@ -30,7 +30,9 @@ Meteor.startup(() => {
           <Route exact path="/viewrooms/:roomId" component={RoomView}/>
           <Route exact path="/viewrooms/chatRoom/:userId" component={ChatRoom}/>
           <Route exact path="/notifications" component={Notifications}/>
-          {/* <Route 
+          {// Code Review - Ricardo Andres Angel Villadiego
+            // No mantener codigo docuemntado as, mejor eliminarlo
+            /* <Route 
             path="/chatRoom" 
             render={(props) => <ChatRoom {...props}
             />} 
